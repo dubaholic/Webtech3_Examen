@@ -7,12 +7,11 @@
 </head>
 <body>
   <h2>All Aanvragen</h2>
-  <ul class='post'>
+  <ul class='list'>
   <% for(var i=0; i < list.length; i++) {%>
-    <li class='post'>
+    <li class='examen'>
       <span><%= list[i].examen %></span>
       <span><%= list[i].reden %></span>
-      <span><%= list[i].datum %></span>
       </li>
   <% } %>
   </ul>

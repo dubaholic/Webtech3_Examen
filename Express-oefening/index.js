@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
-
 var db;
 
 MongoClient.connect('mongodb://localhost:27017/examen', { useNewUrlParser: true },
@@ -15,6 +14,11 @@ MongoClient.connect('mongodb://localhost:27017/examen', { useNewUrlParser: true 
     })
 }) 
 
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
     res.redirect('/submit');
  })
@@ -25,34 +29,41 @@ app.get('/', (req, res) => {
 
   // Add a product to the db
 app.post('/submit', (req, res) => {
-    var naam= req.body.naam;
-    var examen= req.body.examen;
-    var reden= req.body.reden;
-    var datum = new Date();
+    var naamInput= req.body.naam;
+    var examenInput= req.body.examen;
+    var redenInput= req.body.reden;
+    /*var datum = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
-    datum = mm + '/' + dd + '/' + yyyy;
+    datum = mm + '/' + dd + '/' + yyyy;  */
+
+    var myobj = { name: naamInput, examen: examenInput, reden: redenInput};
     
-    db.collection('inhaal').insert(req.body, (err, result) => {
+    db.collection('inhaal').insertOne(myobj, (err, result) => {
        if (err) throw err
+       console.log("Data is opgeslagen")
     })
+
+    res.redirect('/search_name');
     
   })
 
-  app.get('/search_name', (req, res) => {
+    app.get('/search_name', (req, res) => {
       res.render('search_name.ejs', {});
-  })
+  }) 
 
-  // find pokemons between 2 dates
-app.post('/search_name', (req, res) => {
+    app.post('/search_name_result', (req, res) => {
     var query = { name: req.body.name }
     var list = [];
-    db.collection('products').find(query).toArray(function(err, result) {
+    db.collection('products').find(query).toArray((err, result) => {
         if (err) throw err
-        list.push(result);
+        console.log("Naam wordt opgezocht");
+        res.redirect('/search_name_result', {list: result});
       });
-
-      res.render('search_name_result.ejs', {list});
 });
+
+app.get('/search_name_result', (req, res) => {
+    res.render('search_name_result.ejs', {list: result});
+}) 
 
