@@ -20,15 +20,21 @@ export class PokemonService {
       return this.http.get<Pokemon[]>(this._url);
   }
 
-  addRecept(naam: string, calorien: string, ingredienten: string, tijd: string): string {
-    let naamCheck: string ='';
-    const recept: Recept[]= [];
-    if(localStorage.getItem(naam) != null) {
-      naamCheck = localStorage.getItem(calorien);
+  addRecept(naam: string, calorien: string, ingredienten: string, tijd: string){
+    var recept: Recept ={
+    naam :naam.toString(), 
+    calorien:calorien.toString(),
+    ingredienten: ingredienten.toString(),
+    tijd: tijd.toString()
+  };
+   /* if(localStorage.getItem(JSON.stringify(recept)) != null) {
+      naamCheck = localStorage.getItem(JSON.stringify(recept));
     } else {
-    localStorage.setItem(naam, calorien);
+    localStorage.setItem(naam, JSON.stringify(recept));
       }
-    return ingredienten;
+    return ingredienten; */ 
+    localStorage.setItem("1", JSON.stringify(recept));
+    
   }
 
   //zoekt een specifieke pokemon en geeft daarbij een string terug
@@ -55,10 +61,7 @@ export class PokemonService {
 
   }
 
-  
-//Pokemon opzoeken op basis van 2 datums die worden meegegeven en de lijst van alle pokemons
-//Returned een Array van Pokemon
-searchPokemonDate(date1String: string, date2String: string, allPokemon: Pokemon[]): Pokemon[] {
+  searchPokemonDate(date1String: string, date2String: string, allPokemon: Pokemon[]): Pokemon[] {
   //lege array van pokemons gedeclareerd die moeten worden teruggegeven 
   const somePokemon: Pokemon[] = [];
   //ingevoerde datums in variabele gestoken

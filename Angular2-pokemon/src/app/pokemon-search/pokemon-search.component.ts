@@ -20,9 +20,8 @@ export class PokemonSearchComponent {
   ingredienten: string; 
   tijd: string;
 
-  resultnaam: string;
-
-  //initialisatie van de pokemonService
+  
+//initialisatie van de pokemonService
   constructor(private pokemonService: PokemonService) { }
   
 
@@ -34,10 +33,6 @@ export class PokemonSearchComponent {
   }
 
   onSubmit() {
-    /*als de form wordt gesubmit dan wordt 
-      in de result_trainer de data opgeslagen die wordt opgeropen uit de pokemonService
-      met als parameter de waarde de naam van de gezochte pokemon
-    */
     this.pokemonService.addRecept(this.search.value.naam, this.search.value.calorien, this.search.value.ingredienten, this.search.value.tijd);
   }
 
