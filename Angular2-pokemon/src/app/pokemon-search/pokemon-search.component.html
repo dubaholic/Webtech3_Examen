@@ -1,0 +1,26 @@
+<div class = 'container'>
+  <h1>Ask question</h1>
+<!-- Voor het aanroepen van de onSubmit methode uit de ts file-->
+  <form (ngSubmit)='onSubmit()'>
+   <div class = 'form-group' [formGroup]='search'>
+        <label for = 'naam'>Recept naam: </label>
+        <input type = 'text' formControlName='naam'>
+
+        <label for = 'calorien'>Aantal calorieen: </label>
+        <input type = 'text' formControlName='calorien'>
+
+        <label for = 'ingredienten'>Ingredienten </label>
+        <input type = 'text' formControlName='ingredienten'>
+
+        <label for = 'tijd'>Tijd: </label>
+        <input type = 'text' formControlName='tijd'>
+    </div>
+     <br />
+     <button type='submit' class='btn btn-success'>Add</button>
+
+  </form>
+  <br /><br />
+
+
+
+</div>

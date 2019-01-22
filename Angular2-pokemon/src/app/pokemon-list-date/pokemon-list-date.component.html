@@ -1,0 +1,28 @@
+<div class = 'container'>
+  <h1>Ask question</h1>
+<!-- 
+  Voor het aanroepen van de onSubmit methode uit de ts file
+  Altijd gebruik maken van een formgroup voor forms in te lezen in angular
+  'searchDate' wordt gebruikt in de ts file om de formgroup aan te spreken
+-->
+  <form (ngSubmit)='onSubmit()'>
+   <div class = 'form-group' [formGroup]='searchDate'>
+        <label for = 'date1String'>Date 1:</label>
+        <!-- 'date1string' is naam die ook wordt gebruikt in de ts file-->
+        <input type = 'text' formControlName='date1String'>
+        <label for = 'date2String'>Date 2:</label>
+        <input type = 'text' formControlName='date2String'>
+    </div>
+     <br />
+     <button type='submit' class='btn btn-success'>Search</button>
+
+  </form>
+  <br /><br />
+
+<h2>Pokemon List Date</h2>
+    <ul *ngFor="let pokemon of pokemonsDate">
+      Name: <li>{{pokemon.name}}</li>
+      Trainer: <li>{{pokemon.trainer}}</li>
+   </ul>
+
+</div>
