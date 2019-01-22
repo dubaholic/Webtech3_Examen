@@ -33,19 +33,25 @@ app.post('/submit', (req, res) => {
     var examenInput= req.body.examen;
     var redenInput= req.body.reden;
     var datumInput = Date.now();
-    var datumDagen = datumInput.toString().replace(/T/, ':').replace(/\.\w*/, '');
-    /*var datum = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-    datum = mm + '/' + dd + '/' + yyyy;  */
-
-    var myobj = { name: naamInput, examen: examenInput, reden: redenInput, datum: datumDagen};
+    var myobj = { name: naamInput, examen: examenInput, reden: redenInput, datum: datumInput};
     
+    db.collection('inhaal').find(myobj).toArray((err, result) => {
+        if (err) {
+            console.log("bestaat al");
+            res.redirect('submit', {})
+        } else {
+            db.collection('inhaal').insertOne(myobj, (err, result) => {
+                if (err) throw err
+                console.log("Data is opgeslagen")
+             })
+        }
+        
+        });
+        /*
     db.collection('inhaal').insertOne(myobj, (err, result) => {
        if (err) throw err
        console.log("Data is opgeslagen")
-    })
+    }) */
 
     res.redirect('/search_name');
     
@@ -57,8 +63,9 @@ app.post('/submit', (req, res) => {
 
     app.post('/search_name', (req, res) => {
     var query = { name: req.body.name }
-    var list = [];
-    db.collection('inhaal').find(query).toArray((err, result) => {
+
+    var mysort = {reden: 1 };
+    db.collection('inhaal').find(query).sort(mysort).toArray((err, result) => {
         if (err) throw err
         res.render('search_name_result.ejs', {list: result});
         });
