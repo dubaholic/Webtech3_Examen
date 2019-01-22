@@ -27,6 +27,7 @@ export class PokemonService {
     ingredienten: ingredienten.toString(),
     tijd: tijd.toString()
   };
+  
   var naamCheck = naam;
    if(localStorage.getItem(naamCheck) != null) {
       naamCheck = localStorage.getItem(JSON.stringify(recept));
