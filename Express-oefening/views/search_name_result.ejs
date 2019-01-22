@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Pokemon</title>
+  <link rel='stylesheet' href='styles.css'>
+</head>
+<body>
+  <h2>All Aanvragen</h2>
+  <ul class='post'>
+  <% for(var i=0; i < list.length; i++) {%>
+    <li class='post'>
+      <span><%= list[i].examen %></span>
+      <span><%= list[i].reden %></span>
+      <span><%= list[i].datum %></span>
+      </li>
+  <% } %>
+  </ul>
+
+</body>
+</html>
