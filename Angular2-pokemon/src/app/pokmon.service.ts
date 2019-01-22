@@ -21,12 +21,12 @@ export class PokemonService {
   }
 
   addRecept(naam: string, calorien: string, ingredienten: string, tijd: string): string {
-    let ingredientenCheck: string ='';
+    let naamCheck: string ='';
     const recept: Recept[]= [];
     if(localStorage.getItem(naam) != null) {
-      ingredienten = localStorage.getItem(naam);
+      naamCheck = localStorage.getItem(calorien);
     } else {
-    localStorage.setItem(naam, ingredienten);
+    localStorage.setItem(naam, calorien);
       }
     return ingredienten;
   }
