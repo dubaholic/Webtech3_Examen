@@ -53,17 +53,17 @@ app.post('/submit', (req, res) => {
       res.render('search_name.ejs', {});
   }) 
 
-    app.post('/search_name_result', (req, res) => {
+    app.post('/search_name', (req, res) => {
     var query = { name: req.body.name }
     var list = [];
-    db.collection('products').find(query).toArray((err, result) => {
+    db.collection('inhaal').find(query).toArray((err, result) => {
         if (err) throw err
-        console.log("Naam wordt opgezocht");
-        res.redirect('/search_name_result', {list: result});
-      });
+        res.render('search_name_result.ejs', {list: result});
+        });
+      
 });
-
+/*
 app.get('/search_name_result', (req, res) => {
     res.render('search_name_result.ejs', {list: result});
 }) 
-
+*/
