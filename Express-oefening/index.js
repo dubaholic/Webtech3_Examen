@@ -32,13 +32,15 @@ app.post('/submit', (req, res) => {
     var naamInput= req.body.naam;
     var examenInput= req.body.examen;
     var redenInput= req.body.reden;
+    var datumInput = Date.now();
+    var datumDagen = datumInput.toString().replace(/T/, ':').replace(/\.\w*/, '');
     /*var datum = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
     datum = mm + '/' + dd + '/' + yyyy;  */
 
-    var myobj = { name: naamInput, examen: examenInput, reden: redenInput};
+    var myobj = { name: naamInput, examen: examenInput, reden: redenInput, datum: datumDagen};
     
     db.collection('inhaal').insertOne(myobj, (err, result) => {
        if (err) throw err
