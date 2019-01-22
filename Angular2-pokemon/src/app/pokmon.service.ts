@@ -27,15 +27,13 @@ export class PokemonService {
     ingredienten: ingredienten.toString(),
     tijd: tijd.toString()
   };
-   /* if(localStorage.getItem(JSON.stringify(recept)) != null) {
+  var naamCheck = naam;
+   if(localStorage.getItem(naamCheck) != null) {
       naamCheck = localStorage.getItem(JSON.stringify(recept));
     } else {
-    localStorage.setItem(naam, JSON.stringify(recept));
+    localStorage.setItem(naamCheck, JSON.stringify(recept));
       }
-    return ingredienten; */ 
-    localStorage.setItem("1", JSON.stringify(recept));
-    
-  }
+}
 
   //zoekt een specifieke pokemon en geeft daarbij een string terug
   searchPokemon(name: string): string{
